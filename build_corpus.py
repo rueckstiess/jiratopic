@@ -10,15 +10,19 @@ from nltk.corpus import stopwords
 class CorpusBuilder(object):
     def __init__(self, hp, db, coll, lb=0, query=None):
         self.conn = pymongo.MongoClient(hp)[db][coll]
-        self.query = query   # TODO
+
+        if query:
+            self.query = query
+        else:
+            self.query = {'fields.issuetype.name': {'$ne': "Tracking"}}
+
         self.wl = nltk.WordNetLemmatizer()
         self.vocabulary = defaultdict(int)
         self.stop = set(stopwords.words('english'))
         self.lb = lb
 
     def build(self):
-        for d in self.conn.find({'fields.issuetype.name': {'$ne': "Tracking"}},
-                                ['key', 'fields.description', 'fields.comment.comments']):
+        for d in self.conn.find(query, ['key', 'fields.description', 'fields.comment.comments']):
             try:
                 doc = "%s\n\n%s" % (d['fields']['description'],
                                     '\n\n'.join([c['body'] for c in d['fields']['comment']['comments']]))
@@ -49,7 +53,8 @@ class CorpusBuilder(object):
                 pass
 
     def dictionary(self):
-        return [p[0] for p in self.vocabulary.items() if p[0] not in self.stop and p[1] > self.lb and len(p[0]) > 2]
+        return [p[0] for p in self.vocabulary.items() if p[0] not in self.stop and p[1] > self.lb \
+                                                         and len(p[0]) > 2 and len(p[0]) < 15]
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
