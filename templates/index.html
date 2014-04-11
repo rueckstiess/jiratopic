@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+    <title>Topics Flow</title>
+    <style>
+        body {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script src="/static/js/d3.min.js"></script>
+    <script>
+    topics_30 = [
+"NETWORKING / CONNECTIONS",
+"HARDWARE / RESOURCES",
+"DRIVERS",
+"MMS",
+"?1",
+"JIRA",
+"QUERY",
+"REPLICATION",
+"REPLICATION",
+"STORAGE???",
+"NETWORKING / SETUP / LIMITS",
+"CHUNKS",
+"NETWORKING / PROBLEMS",
+"SHARDING / CONFIG SERVER",
+"SHARDING / BALANCING",
+"DIAGNOSIS",
+"SHELL",
+"AUTH/SECURITY",
+"QUERY / DOCUMENTS",
+"OPS / RESTART",
+"STORAGE / OPS",
+"STORAGE",
+"CHUNKS",
+"INDEXING",
+"UPGRADING",
+"INITIAL DIAGNOSIS",
+"INDEXING / OPTIMIZATION",
+"REPLICASET CONFIGURATION",
+"BACKUPS",
+"NETWORKING / DNS"
+];
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 1280 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+    /*
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+    */
+
+var x = d3.time.scale();
+
+var y = d3.scale.linear()
+    .rangeRound([height, 0]);
+
+var color = d3.scale.category20()
+    .domain(topics_30);
+
+// FIXME hack 10 more colors in
+color.range(color.range().concat(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]));
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(d3.format(".2s"));
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// FIXME
+d3.json("/topics?s=20090806&e=20140411", function(error, data) {
+  /*
+  {
+    start_date:
+    end_date:
+    topics: {
+        {name: "topic", y0: start, y1: end},
+        ...
+    }
+  }
+  */
+  x.domain(data.map(function(d) {return new Date(d.end_time);}));
+
+  data.forEach(function(d) {
+    var y0 = 0;
+    d.topics = color.domain().map(function(name, i) { return {name: name, y0: y0, y1: y0 += +d.topics[i]}; });
+    d.total = d.topics[d.topics.length - 1].y1;
+  });
+
+  data.sort(function(a, b) { return b.total - a.total; });
+
+  x.domain(data.map(function(d) { return new Date(d.end_date); }));
+  y.domain([0, d3.max(data, function(d) { return d.total; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Population");
+
+  var state = svg.selectAll(".state")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; });
+
+  state.selectAll("rect")
+      .data(function(d) { return d.ages; })
+    .enter().append("rect")
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.y1); })
+      .attr("height", function(d) { return y(d.y0) - y(d.y1); })
+      .style("fill", function(d) { return color(d.name); });
+
+  var legend = svg.selectAll(".legend")
+      .data(color.domain().slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+});
+</script>
+</body>
+</html>

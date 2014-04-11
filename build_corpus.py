@@ -1,52 +1,35 @@
 import pymongo
 import argparse
-import re
-import nltk
+import corpus
 
 from collections import defaultdict
-
 from nltk.corpus import stopwords
 
+
 class CorpusBuilder(object):
-    def __init__(self, hp, db, coll, lb=0, query=None):
-        self.conn = pymongo.MongoClient(hp)[db][coll]
+    def __init__(self, conn, query=None, lb=0):
+        self.conn = conn
 
         if query:
             self.query = query
         else:
             self.query = {'fields.issuetype.name': {'$ne': "Tracking"}}
 
-        self.wl = nltk.WordNetLemmatizer()
         self.vocabulary = defaultdict(int)
         self.stop = set(stopwords.words('english'))
         self.lb = lb
 
     def build(self):
-        for d in self.conn.find(query, ['key', 'fields.description', 'fields.comment.comments']):
+        for d in self.conn.find(self.query, ['key', 'fields.description', 'fields.comment.comments']):
             try:
-                doc = "%s\n\n%s" % (d['fields']['description'],
-                                    '\n\n'.join([c['body'] for c in d['fields']['comment']['comments']]))
-                clean = doc.replace('\n', ' ').replace('\r', ' ')
+                doc = corpus.CorpusDocument("%s\n\n%s" % (
+                    d['fields']['description'],
+                    '\n\n'.join([c['body'] for c in d['fields']['comment']['comments']])
+                ))
+                doc = doc.parse()
 
-                # remove JIRA formatting: {noformat}.*?{noformat}
-                clean = re.sub('\{noformat\}.*?\{noformat\}', ' ', clean)
-
-                # remove JIRA formatting: {code(:.*?)?}.*?{code}
-                clean = re.sub('\{code(:.*?)?\}.*?\{code\}', ' ', clean)
-
-                # remove anything in square brackets
-                clean = re.sub('\[.*?\]', ' ', clean)
-
-                clean = re.sub('\s', ' ', clean)
-                clean = re.sub(r'\b([A-Za-z]*[-:/\._0-9]+)+[A-Za-z]*\b', ' ', clean)
-                clean = re.sub('[^A-Za-z ]', '', clean)
-                clean = re.sub('\s+', ' ', clean)
-                doc = []
-
-                for w in clean.split():
-                    word = self.wl.lemmatize(w.lower())
-                    doc.append(word)
-                    self.vocabulary[word] += 1
+                for w in doc:
+                    self.vocabulary[w] += 1
 
                 yield {'key': d['key'], 'doc': doc}
             except:
@@ -68,7 +51,8 @@ if __name__ == '__main__':
     parser.add_argument('-v', '--vocabulary', metavar='FILE')
     args = parser.parse_args()
 
-    cb = CorpusBuilder(args.server, args.database, args.collection, args.lowerbound)
+    conn = pymongo.MongoClient(args.server)[args.database][args.collection]
+    cb = CorpusBuilder(conn, query=None, lb=args.lowerbound)
     f = open(args.file, 'w')
 
     for i, t in enumerate(cb.build()):
