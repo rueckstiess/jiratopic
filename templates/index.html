@@ -67,16 +67,17 @@ var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
     */
 
-var x = d3.time.scale();
+var x = d3.time.scale()
+    .rangeRoundBands([0, width], .1);
 
 var y = d3.scale.linear()
     .rangeRound([height, 0]);
 
-var color = d3.scale.category20()
-    .domain(topics_30);
+var color = d3.scale.category20();
 
 // FIXME hack 10 more colors in
 color.range(color.range().concat(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]));
+color.domain(topics_30);
 
 var xAxis = d3.svg.axis()
     .scale(x)
