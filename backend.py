@@ -24,11 +24,13 @@ def group_by_weeks(coll, start_date, end_date):
 
         try:
             mat = n.matrix([d['topic_scores'] for d in coll.find(query, ['topic_scores'])])
+            rowsum = mat.sum(axis=1)
+            norm = mat / rowsum.reshape(rowsum.shape[0], 1)
 
             yield {
                 'start_date': i.isoformat(),
                 'end_date': j.isoformat(),
-                'topics': mat.sum(axis=0).tolist()[0],
+                'topics': norm.sum(axis=0).tolist()[0],
                 'num_issues': mat.shape[0]
             }
         except:
