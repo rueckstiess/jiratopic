@@ -1,0 +1,460 @@
+topic 0: NETWORKING
+          connection  	---	  0.2167
+           exception  	---	  0.0566
+              socket  	---	  0.0499
+            accepted  	---	  0.0393
+                 end  	---	  0.0381
+                open  	---	  0.0317
+               error  	---	  0.0308
+              failed  	---	  0.0257
+              server  	---	  0.0227
+             attempt  	---	  0.0204
+              cursor  	---	  0.0189
+             connect  	---	  0.0139
+           reconnect  	---	  0.0130
+               stale  	---	  0.0119
+              across  	---	  0.0117
+            detected  	---	  0.0111
+          initialize  	---	  0.0109
+              remote  	---	  0.0105
+               reset  	---	  0.0102
+               shard  	---	  0.0099
+SUM: 1.0
+
+topic 1: STATS / DBA (OPS???)
+              memory  	---	  0.0578
+                size  	---	  0.0401
+                file  	---	  0.0332
+              kernel  	---	  0.0271
+                 max  	---	  0.0246
+                byte  	---	  0.0239
+           unlimited  	---	  0.0230
+             process  	---	  0.0198
+               limit  	---	  0.0174
+                 cpu  	---	  0.0171
+              mongod  	---	  0.0166
+             virtual  	---	  0.0149
+              ulimit  	---	  0.0142
+              mapped  	---	  0.0113
+                leak  	---	  0.0104
+             warning  	---	  0.0100
+             setting  	---	  0.0096
+             mongodb  	---	  0.0092
+              system  	---	  0.0087
+                swap  	---	  0.0084
+SUM: 1.0
+
+topic 2: DRIVERS (Java???)
+              driver  	---	  0.0274
+                code  	---	  0.0164
+               using  	---	  0.0142
+               mongo  	---	  0.0130
+               issue  	---	  0.0124
+                test  	---	  0.0111
+         application  	---	  0.0109
+                 get  	---	  0.0109
+              server  	---	  0.0108
+             version  	---	  0.0107
+                java  	---	  0.0099
+              client  	---	  0.0097
+                 set  	---	  0.0079
+                like  	---	  0.0074
+                work  	---	  0.0072
+             mongodb  	---	  0.0069
+               error  	---	  0.0064
+                call  	---	  0.0059
+             release  	---	  0.0056
+                 new  	---	  0.0056
+SUM: 1.0
+
+topic 3: MMS
+               agent  	---	  0.0646
+                host  	---	  0.0524
+          monitoring  	---	  0.0167
+              server  	---	  0.0145
+                data  	---	  0.0135
+               alert  	---	  0.0134
+               group  	---	  0.0129
+                file  	---	  0.0125
+              backup  	---	  0.0125
+             running  	---	  0.0124
+                line  	---	  0.0113
+                page  	---	  0.0111
+             problem  	---	  0.0085
+                know  	---	  0.0084
+               issue  	---	  0.0078
+                 let  	---	  0.0076
+             connect  	---	  0.0074
+                info  	---	  0.0072
+                name  	---	  0.0065
+                like  	---	  0.0064
+SUM: 1.0
+
+topic 4: STATS
+                 min  	---	  0.0609
+                 max  	---	  0.0596
+             getmore  	---	  0.0477
+                 sec  	---	  0.0448
+            objectid  	---	  0.0431
+                date  	---	  0.0400
+                 new  	---	  0.0309
+                time  	---	  0.0238
+              maxkey  	---	  0.0237
+              minkey  	---	  0.0237
+              active  	---	  0.0192
+              server  	---	  0.0184
+               chunk  	---	  0.0176
+              detail  	---	  0.0161
+               split  	---	  0.0151
+                 gte  	---	  0.0144
+               query  	---	  0.0137
+              middle  	---	  0.0121
+                conn  	---	  0.0120
+                true  	---	  0.0115
+SUM: 1.0
+
+topic 5: JIRA
+              ticket  	---	  0.0334
+               issue  	---	  0.0192
+                know  	---	  0.0190
+               group  	---	  0.0179
+                 let  	---	  0.0172
+             support  	---	  0.0156
+                jira  	---	  0.0144
+            question  	---	  0.0136
+               email  	---	  0.0128
+                user  	---	  0.0104
+             mongodb  	---	  0.0094
+                like  	---	  0.0092
+             account  	---	  0.0092
+                call  	---	  0.0087
+                 new  	---	  0.0085
+                team  	---	  0.0075
+                help  	---	  0.0074
+         information  	---	  0.0071
+            customer  	---	  0.0067
+                 add  	---	  0.0065
+SUM: 1.0
+
+topic 6: ???
+               query  	---	  0.2443
+            objectid  	---	  0.1162
+             command  	---	  0.0748
+               count  	---	  0.0360
+                info  	---	  0.0270
+             version  	---	  0.0266
+                null  	---	  0.0260
+               shard  	---	  0.0219
+           timestamp  	---	  0.0214
+               empty  	---	  0.0196
+            skipping  	---	  0.0195
+            serverid  	---	  0.0182
+              extent  	---	  0.0174
+               ahead  	---	  0.0170
+           shardhost  	---	  0.0164
+            configdb  	---	  0.0148
+              millis  	---	  0.0114
+                true  	---	  0.0084
+            username  	---	  0.0084
+              client  	---	  0.0081
+SUM: 1.0
+
+topic 7: REPLICATION
+             replset  	---	  0.0494
+              master  	---	  0.0341
+                 set  	---	  0.0338
+               slave  	---	  0.0296
+                size  	---	  0.0259
+             updated  	---	  0.0219
+           assertion  	---	  0.0217
+               oplog  	---	  0.0173
+         storagesize  	---	  0.0172
+               index  	---	  0.0170
+          collection  	---	  0.0168
+               count  	---	  0.0162
+          avgobjsize  	---	  0.0151
+          numextents  	---	  0.0148
+               error  	---	  0.0139
+                 gmt  	---	  0.0130
+            nindexes  	---	  0.0123
+       paddingfactor  	---	  0.0118
+              object  	---	  0.0117
+      lastextentsize  	---	  0.0116
+SUM: 1.0
+
+topic 8: REPLICATION
+             primary  	---	  0.0551
+           secondary  	---	  0.0548
+                 set  	---	  0.0499
+             replica  	---	  0.0451
+                node  	---	  0.0436
+              member  	---	  0.0235
+                 new  	---	  0.0140
+         replication  	---	  0.0105
+                data  	---	  0.0094
+             arbiter  	---	  0.0087
+                sync  	---	  0.0080
+              server  	---	  0.0066
+                time  	---	  0.0065
+            question  	---	  0.0065
+                step  	---	  0.0059
+                back  	---	  0.0057
+               oplog  	---	  0.0055
+               state  	---	  0.0048
+                case  	---	  0.0047
+                 add  	---	  0.0046
+SUM: 1.0
+
+topic 9: STATS ???
+              insert  	---	  0.0660
+                 sec  	---	  0.0522
+               query  	---	  0.0491
+          allocating  	---	  0.0410
+            datafile  	---	  0.0409
+                done  	---	  0.0348
+                size  	---	  0.0336
+                 new  	---	  0.0277
+                took  	---	  0.0269
+               index  	---	  0.0218
+             filling  	---	  0.0216
+              source  	---	  0.0204
+             created  	---	  0.0186
+                none  	---	  0.0164
+             unknown  	---	  0.0159
+           available  	---	  0.0156
+               total  	---	  0.0148
+                file  	---	  0.0142
+                idle  	---	  0.0138
+               build  	---	  0.0135
+SUM: 1.0
+
+topic 10: ??? (basic installation / dba stuff)
+              mongod  	---	  0.2812
+                root  	---	  0.1723
+                 tcp  	---	  0.1053
+         established  	---	  0.0906
+                 mem  	---	  0.0510
+          permission  	---	  0.0196
+              denied  	---	  0.0181
+             unknown  	---	  0.0162
+            maxconns  	---	  0.0138
+                unix  	---	  0.0124
+         pidfilepath  	---	  0.0124
+            configdb  	---	  0.0114
+                 pci  	---	  0.0105
+                 txt  	---	  0.0066
+                type  	---	  0.0060
+                 dir  	---	  0.0059
+              stream  	---	  0.0051
+              window  	---	  0.0045
+           connected  	---	  0.0043
+              master  	---	  0.0032
+SUM: 1.0
+
+topic 11: ???
+               false  	---	  0.1004
+          numberlong  	---	  0.0660
+                true  	---	  0.0603
+             isodate  	---	  0.0561
+             primary  	---	  0.0442
+                name  	---	  0.0400
+                 key  	---	  0.0357
+         partitioned  	---	  0.0327
+                 cmd  	---	  0.0265
+           timestamp  	---	  0.0207
+              errmsg  	---	  0.0167
+                host  	---	  0.0165
+             command  	---	  0.0163
+               print  	---	  0.0136
+                 var  	---	  0.0118
+               fsync  	---	  0.0117
+                type  	---	  0.0113
+              status  	---	  0.0103
+              minkey  	---	  0.0099
+        serverstatus  	---	  0.0093
+SUM: 1.0
+
+topic 12: ??? (basic error reporting?)
+                 log  	---	  0.0538
+               issue  	---	  0.0338
+               error  	---	  0.0197
+                time  	---	  0.0184
+             problem  	---	  0.0151
+                file  	---	  0.0117
+              ticket  	---	  0.0113
+             message  	---	  0.0099
+                like  	---	  0.0094
+               mongo  	---	  0.0091
+                know  	---	  0.0084
+             running  	---	  0.0082
+                 get  	---	  0.0079
+               still  	---	  0.0076
+               cause  	---	  0.0074
+              server  	---	  0.0073
+                back  	---	  0.0068
+              mongod  	---	  0.0066
+            attached  	---	  0.0060
+              seeing  	---	  0.0060
+SUM: 1.0
+
+topic 13: SHARDING / REPLICATION
+               mongo  	---	  0.1153
+              server  	---	  0.0727
+              config  	---	  0.0720
+               shard  	---	  0.0318
+             cluster  	---	  0.0254
+            database  	---	  0.0219
+             sharded  	---	  0.0146
+          collection  	---	  0.0127
+             process  	---	  0.0124
+                 new  	---	  0.0112
+            instance  	---	  0.0105
+                 set  	---	  0.0100
+                host  	---	  0.0096
+              mongod  	---	  0.0093
+             running  	---	  0.0072
+             connect  	---	  0.0067
+             command  	---	  0.0063
+             replica  	---	  0.0063
+                data  	---	  0.0062
+                 run  	---	  0.0058
+SUM: 1.0
+
+topic 14: SHARDING
+               shard  	---	  0.0827
+               chunk  	---	  0.0687
+            balancer  	---	  0.0273
+                data  	---	  0.0216
+          collection  	---	  0.0200
+           migration  	---	  0.0193
+               split  	---	  0.0153
+                 key  	---	  0.0136
+                move  	---	  0.0115
+              script  	---	  0.0106
+                 new  	---	  0.0092
+            sharding  	---	  0.0086
+           balancing  	---	  0.0086
+             cluster  	---	  0.0082
+            document  	---	  0.0078
+             balance  	---	  0.0078
+                size  	---	  0.0072
+               mongo  	---	  0.0065
+              config  	---	  0.0061
+                time  	---	  0.0054
+SUM: 1.0
+
+topic 15: STATS / PERFORMANCE
+                time  	---	  0.0193
+                load  	---	  0.0103
+                data  	---	  0.0101
+         performance  	---	  0.0100
+                disk  	---	  0.0091
+              update  	---	  0.0077
+                read  	---	  0.0073
+               write  	---	  0.0071
+              number  	---	  0.0069
+                like  	---	  0.0067
+               query  	---	  0.0066
+                slow  	---	  0.0066
+                lock  	---	  0.0065
+                 run  	---	  0.0064
+             running  	---	  0.0064
+                test  	---	  0.0064
+           operation  	---	  0.0062
+                high  	---	  0.0060
+               issue  	---	  0.0059
+              system  	---	  0.0056
+SUM: 1.0
+
+topic 16: BACKUPS???
+                data  	---	  0.0367
+                file  	---	  0.0317
+            database  	---	  0.0221
+              backup  	---	  0.0215
+          collection  	---	  0.0208
+               oplog  	---	  0.0134
+               space  	---	  0.0110
+            snapshot  	---	  0.0109
+                 run  	---	  0.0099
+                disk  	---	  0.0097
+             restore  	---	  0.0091
+           mongodump  	---	  0.0090
+                size  	---	  0.0088
+            document  	---	  0.0086
+              repair  	---	  0.0079
+               using  	---	  0.0078
+              option  	---	  0.0075
+             command  	---	  0.0067
+             mongodb  	---	  0.0065
+                take  	---	  0.0063
+SUM: 1.0
+
+topic 17: OPS
+                user  	---	  0.0383
+             mongodb  	---	  0.0192
+            database  	---	  0.0168
+                file  	---	  0.0155
+               admin  	---	  0.0154
+      authentication  	---	  0.0153
+             command  	---	  0.0143
+               using  	---	  0.0141
+             version  	---	  0.0132
+               error  	---	  0.0113
+                 run  	---	  0.0105
+              script  	---	  0.0104
+               build  	---	  0.0096
+              window  	---	  0.0087
+                 ssl  	---	  0.0086
+                auth  	---	  0.0083
+             install  	---	  0.0078
+               shell  	---	  0.0078
+                role  	---	  0.0076
+           following  	---	  0.0076
+SUM: 1.0
+
+topic 18: ??? (QUERY ENGINE???)
+               index  	---	  0.0569
+               query  	---	  0.0397
+            document  	---	  0.0314
+          collection  	---	  0.0196
+               field  	---	  0.0163
+              result  	---	  0.0087
+               using  	---	  0.0086
+              update  	---	  0.0085
+               value  	---	  0.0082
+                like  	---	  0.0079
+               array  	---	  0.0075
+                 key  	---	  0.0070
+                data  	---	  0.0069
+             explain  	---	  0.0067
+                case  	---	  0.0062
+                 run  	---	  0.0058
+            question  	---	  0.0058
+             example  	---	  0.0057
+                sort  	---	  0.0056
+                find  	---	  0.0049
+SUM: 1.0
+
+topic 19: UPGRADES
+             version  	---	  0.0674
+             upgrade  	---	  0.0506
+                lock  	---	  0.0500
+             mongodb  	---	  0.0275
+            shutdown  	---	  0.0221
+                port  	---	  0.0197
+             warning  	---	  0.0183
+             process  	---	  0.0172
+                true  	---	  0.0152
+             running  	---	  0.0132
+          connecting  	---	  0.0127
+              mongod  	---	  0.0125
+               mongo  	---	  0.0120
+               state  	---	  0.0119
+              dbpath  	---	  0.0117
+           upgrading  	---	  0.0115
+             waiting  	---	  0.0115
+         distributed  	---	  0.0105
+            starting  	---	  0.0102
+               going  	---	  0.0099
+SUM: 1.0
+
