@@ -121,7 +121,7 @@ class OnlineLDA:
         self._updatect = 0
 
         # Initialize the variational distribution q(beta|lambda)
-        if init_lambda:
+        if init_lambda != None:
             self._lambda = init_lambda
         else:
             self._lambda = 1*n.random.gamma(100., 1./100., (self._K, self._W))

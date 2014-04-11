@@ -34,7 +34,7 @@ def main():
     # The total number of documents in Wikipedia
     D = 14617
     # The number of topics
-    K = 10
+    K = 40
 
     # How many documents to look at
     if (len(sys.argv) < 2):
