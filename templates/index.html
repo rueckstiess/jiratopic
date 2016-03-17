@@ -1,4 +1,5 @@
 <!doctype html>
+<meta charset="utf-8">
 <html>
 <head>
     <title>Topics Flow</title>
@@ -22,53 +23,21 @@
             display: none;
         }
     </style>
+        <script src="/static/js/d3.min.js"></script>
+
 </head>
 <body>
-    <script src="/static/js/d3.min.js"></script>
     <script>
-    topics_30 = [
-"NETWORKING / CONNECTIONS",
-"HARDWARE / RESOURCES",
-"DRIVERS",
-"MMS",
-"?1",
-"JIRA",
-"QUERY",
-"REPLICATION",
-"REPLICATION",
-"STORAGE???",
-"NETWORKING / SETUP / LIMITS",
-"CHUNKS",
-"NETWORKING / PROBLEMS",
-"SHARDING / CONFIG SERVER",
-"SHARDING / BALANCING",
-"DIAGNOSIS",
-"SHELL",
-"AUTH/SECURITY",
-"QUERY / DOCUMENTS",
-"OPS / RESTART",
-"STORAGE / OPS",
-"STORAGE",
-"CHUNKS",
-"INDEXING",
-"UPGRADING",
-"INITIAL DIAGNOSIS",
-"INDEXING / OPTIMIZATION",
-"REPLICASET CONFIGURATION",
-"BACKUPS",
-"NETWORKING / DNS"
-];
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 1280 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
 
-    /*
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-    */
+    var topics_30 = ["NETWORKING / CONNECTIONS","HARDWARE / RESOURCES","DRIVERS", "MMS", "?1", "JIRA", "QUERY", "REPLICATION", "REPLICATION", "STORAGE???", "NETWORKING / SETUP / LIMITS", "CHUNKS", "NETWORKING / PROBLEMS", "SHARDING / CONFIG SERVER", "SHARDING / BALANCING", "DIAGNOSIS", "SHELL", "AUTH/SECURITY", "QUERY / DOCUMENTS", "OPS / RESTART", "STORAGE / OPS", "STORAGE", "CHUNKS", "INDEXING", "UPGRADING", "INITIAL DIAGNOSIS", "INDEXING / OPTIMIZATION", "REPLICASET CONFIGURATION", "BACKUPS", "NETWORKING / DNS"];
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40};
+var width = 1200 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 var x = d3.time.scale()
-    .rangeRoundBands([0, width], .1);
+    .range([0, 0.7*width]);
+    //.rangeRoundBands([0, width], .1);
 
 var y = d3.scale.linear()
     .rangeRound([height, 0]);
@@ -95,28 +64,17 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // FIXME
-d3.json("/topics?s=20090806&e=20140411", function(error, data) {
-  /*
-  {
-    start_date:
-    end_date:
-    topics: {
-        {name: "topic", y0: start, y1: end},
-        ...
-    }
-  }
-  */
-  x.domain(data.map(function(d) {return new Date(d.end_time);}));
-
+d3.json("/topics?s=20110101&e=20140411&n=true", function(error, data) {
   data.forEach(function(d) {
     var y0 = 0;
     d.topics = color.domain().map(function(name, i) { return {name: name, y0: y0, y1: y0 += +d.topics[i]}; });
     d.total = d.topics[d.topics.length - 1].y1;
   });
 
-  data.sort(function(a, b) { return b.total - a.total; });
+  //data.sort(function(a, b) { return b.total - a.total; });
 
-  x.domain(data.map(function(d) { return new Date(d.end_date); }));
+  dates = data.map(function(d) { return new Date(d.end_date); });
+  x.domain([dates[0], dates[dates.length - 1]]);
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
   svg.append("g")
@@ -132,18 +90,18 @@ d3.json("/topics?s=20090806&e=20140411", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Population");
+      .text("Topic Distribution");
 
   var state = svg.selectAll(".state")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
-      .attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; });
+      .attr("transform", function(d) { return "translate(" + x(new Date(d.end_date)) + ",0)"; });
 
   state.selectAll("rect")
-      .data(function(d) { return d.ages; })
+      .data(function(d) { return d.topics; })
     .enter().append("rect")
-      .attr("width", x.rangeBand())
+      .attr("width", function(d){return width/dates.length;})
       .attr("y", function(d) { return y(d.y1); })
       .attr("height", function(d) { return y(d.y0) - y(d.y1); })
       .style("fill", function(d) { return color(d.name); });
@@ -166,7 +124,6 @@ d3.json("/topics?s=20090806&e=20140411", function(error, data) {
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
-
 });
 </script>
 </body>
